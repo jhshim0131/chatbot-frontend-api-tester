@@ -1,26 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
 
 function HospitalizationLivingTodayMeal() {
+
     const [data, setData] = useState(null); // API 결과 저장
     const [error, setError] = useState(null); // 에러 상태 저장
     const [loading, setLoading] = useState(true); // 로딩 상태 저장
 
-    const navigate = useNavigate(); // useNavigate 훅 사용
 
-    const goToMealMenuChange = () => {
-        navigate('/mock/lvng/meal/change');
-    };
-
-    const localTestUrl = 'http://localhost:8081/dfd/api/hsp/few/v1/hsptlz/lvng/meal?hspId=9&usrId=109&mealDate=2024-11-08'; // 로컬 테스트용 API URL
-    const devUrl = 'https://karechat-hsp-yumc-dev.kakaohealthcare.com/dfd/api/hsp/few/v1/hsptlz/lvng/meal?hspId=9&usrId=109&mealDate=2024-11-08';
-    const url = 'https://46a3e800-0549-4a73-af78-ff4b0960636d.mock.pstmn.io/dfd/api/if/his/H51';
+    const url = 'https://46a3e800-0549-4a73-af78-ff4b0960636d.mock.pstmn.io/dfd/api/if/his/H52';
 
     useEffect(() => {
         // 페이지 로드 시 API 호출
 
         fetch(url, {
-            method: 'GET',
+            method: 'POST',
         })
             .then((response) => {
                 if (!response.ok) {
@@ -43,11 +36,10 @@ function HospitalizationLivingTodayMeal() {
 
     return (
         <div style={{padding: '20px'}}>
-            <h1>식단 조회</h1>
+            <h1>식단 변경</h1>
             <pre style={{background: '#f4f4f4', padding: '10px', textAlign: 'left'}}>
                 {JSON.stringify(data, null, 2)} {/* JSON 결과 Pretty Print */}
             </pre>
-            <button onClick={goToMealMenuChange}>식단 변경</button>
         </div>
     );
 
