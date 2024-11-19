@@ -1,29 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {Route, Routes} from 'react-router-dom';
+import Home from './components/Home'; // 기본 페이지
+import HospitalizationLivingTodayMeal from './components/HospitalizationLivingTodayMeal'; // API 호출 결과를 보여주는 페이지
+
 
 function App() {
-  const [result, setResult] = useState('');
-  const [error, setError] = useState('');
-
-  const callApi = () => {
-    fetch('/call-api')
-        .then(response => response.json())
-        .then(data => {
-          setResult(`Result: ${JSON.stringify(data)}`);
-          setError('');
-        })
-        .catch(err => {
-          setError(`Error: ${err.message}`);
-          setResult('');
-        });
-  };
-
-  return (
-      <div style={{ textAlign: 'center', marginTop: '50px' }}>
-        <h1>API Trigger Example</h1>
-        <button onClick={callApi}>Call API</button>
-        <p>{result || error}</p>
-      </div>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/mock/lvng/meal" element={<HospitalizationLivingTodayMeal />} />
+        </Routes>
+    );
 }
 
 export default App;
